@@ -1,26 +1,24 @@
-import express from "express";
-import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
-import authRoutes from "./routes/auth";
-
+import express from 'express';
+import dotenv from 'dotenv';
+import { PrismaClient } from '@prisma/client';
+import authRoutes from './routes/authRoutes';
+import taskRoute from './routes/tasksRoute';
 
 dotenv.config();
 const app = express();
-//Prisma client
 const prisma = new PrismaClient();
 
 app.use(express.json());
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoute);
 
-//Rotas
-app.use("/api/auth", authRoutes);
-
-app.get("/", (req, res) => {
-  res.send("Task Manager API está rodando!");
+app.get('/', (req, res) => {
+  res.send('Task Manager API is running!');
 });
 
-const port = process.env.PORT || 3001;
-app.listen(port, async () => {
-  console.log(`Servidor rodando na porta ${port}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, async () => {
+  console.log(`Server running on port ${PORT}`);
   await prisma.$connect();
-  console.log("Conectado ao banco de dados");
+  console.log('Database connected');
 });
