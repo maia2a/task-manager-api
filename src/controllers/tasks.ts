@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
+
 const prisma = new PrismaClient();
 
 //Get all tasks
@@ -17,6 +18,7 @@ export const getTasks = async (req: any, res: Response) => {
   } catch (error) {
     res.status(500).json({ error: "Erro ao buscar tarefas" });
   }
+
 };
 
 //Create a task

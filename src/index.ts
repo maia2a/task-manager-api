@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/authRoutes';
 import taskRoute from './routes/tasksRoute';
 import commentRoute from './routes/comments';
+import analyticsRoute from './routes/analytics';
 import { authMiddleware } from './middleware/authMiddleware';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
@@ -25,6 +26,7 @@ const io = new Server(httpServer, {
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoute);
+app.use('/api/analytics', analyticsRoute);
 
 app.use('/api/comments', commentRoute);
 
