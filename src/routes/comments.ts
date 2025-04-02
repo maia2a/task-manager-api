@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/auth";
+import { authMiddleware } from "../middleware/authMiddleware";
 import { getComments, createComment, deleteComment } from "../controllers/comments";
 
 const router = Router();
 
-router.use(authMiddleware);
+router.use(authMiddleware as any);
 
 router.get("/:taskId", getComments);
 router.post("/:taskId", createComment);

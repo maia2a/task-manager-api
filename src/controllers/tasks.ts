@@ -8,10 +8,10 @@ export const getTasks = async (req: any, res: Response) => {
   try {
     const tasks = await prisma.task.findMany({
       where: {
-        assignee: { id: req.user.id },
-        include: { comments: true },
-        orderBy: { createdAt: 'desc' }
-      }
+        assignee: { id: req.user.id }
+      },
+      include: { comments: true },
+      orderBy: { createdAt: 'desc' }
     });
     res.json(tasks);
   } catch (error) {
