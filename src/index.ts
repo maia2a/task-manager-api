@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/authRoutes';
 import taskRoute from './routes/tasksRoute';
 import commentRoute from './routes/comments';
+import { authMiddleware } from './middleware/authMiddleware';
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoute);
 
 app.use('/api/comments', commentRoute);
+
+// Middleware para autenticação
+app.use(authMiddleware as any);
+app.use('/api/comments', commentRoute);
+app.use('/api/tasks', taskRoute);
+
 
 app.get('/', (req, res) => {
   res.send('Task Manager API is running!');

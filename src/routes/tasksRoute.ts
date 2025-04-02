@@ -1,10 +1,10 @@
 import e, { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { authMiddleware } from "../middleware/authMiddleware";
 import { getTasks, createTask, updateTask, deleteTask, getTask } from "../controllers/tasks";
 
 const router = Router();
 
-router.use(authMiddleware);
+router.use(authMiddleware as any);
 
 router.get("/", getTasks);
 router.get("/:id", getTask as any);
